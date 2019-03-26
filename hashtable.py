@@ -5,6 +5,8 @@ import binascii
 from collections import namedtuple
 from io import StringIO
 from functools import reduce
+from PIL import Image, ImageStat
+from math import floor
 
 
 # a named tuple to hold an individual key and value
@@ -15,10 +17,11 @@ Node = namedtuple("Node", ('key', 'value'))
 # This is super small because we want to test the loading and print for debugging easier
 NUM_BUCKETS = 10
 
-# return a value between 0-9
-
 
 def mod(value):
+    ''' 
+    return a value between 0-9
+    '''
     return value % 10
 
 
@@ -133,3 +136,7 @@ class ImageHashtable(Hashtable):
         The number will be in the range of the number of buckets.
         '''
         # TODO: hash the string and return the bucket index that should be used
+        img = Image.open("images/" + key)
+        hash_num = floor(
+            reduce(lambda a, b: a + b, ImageStat.Stat(img).mean))
+        return mod(hash_num)
