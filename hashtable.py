@@ -114,6 +114,9 @@ class GuidHashtable(Hashtable):
         The number will be in the range of the number of buckets.
         '''
         # TODO: hash the string and return the bucket index that should be used
+        hex_counter = key[COUNTER_CHARS[0]:COUNTER_CHARS[1]]
+        decimal_counter = int(hex_counter, 16)
+        return mod(decimal_counter)
 
 
 ######################################################
