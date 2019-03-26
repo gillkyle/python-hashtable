@@ -36,7 +36,6 @@ class Hashtable(object):
         '''
         Adds the given key=value pair to the hashtable.
         '''
-        # TODO: store the value by the hash of the key
         node = Node(key, value)
         self.buckets[self.get_bucket_index(key)].append(node)
         return
@@ -46,7 +45,6 @@ class Hashtable(object):
         Retrieves the value under the given key.
         Returns None if the key does not exist.
         '''
-        # TODO: get the value by the hash of the key
         records = self.buckets[self.get_bucket_index(key)]
         return next(record.value for record in records if record.key == key)
 
@@ -92,7 +90,6 @@ class StringHashtable(Hashtable):
         Returns the bucket index number for the given key.
         The number will be in the range of the number of buckets.
         '''
-        # TODO: hash the string and return the bucket index that should be used
         ascii_codes = [ord(c) for c in key]
         # sum the ascii codes
         sum_codes = reduce(lambda a, b: a + b, ascii_codes)
@@ -113,7 +110,6 @@ class GuidHashtable(Hashtable):
         Returns the bucket index number for the given key.
         The number will be in the range of the number of buckets.
         '''
-        # TODO: hash the string and return the bucket index that should be used
         hex_counter = key[COUNTER_CHARS[0]:COUNTER_CHARS[1]]
         decimal_counter = int(hex_counter, 16)
         return mod(decimal_counter)
