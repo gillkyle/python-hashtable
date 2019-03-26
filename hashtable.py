@@ -54,6 +54,10 @@ class Hashtable(object):
         Returns silently if the key does not exist.
         '''
         # TODO: remove the value by the hash of the key
+        bucket = self.buckets[self.get_bucket_index(key)]
+        for index, node in enumerate(bucket):
+            if node.key == key:
+                del bucket[index]
 
     def get_bucket_index(self, key):
         '''
